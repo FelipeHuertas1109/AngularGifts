@@ -1,9 +1,9 @@
-<div class="min-h-screen bg-gray-50 py-8">
+<div class="min-h-screen bg-white py-8">
   <div class="max-w-6xl mx-auto px-4">
     <!-- Header -->
     <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold text-gray-900 mb-4">Buscar GIFs</h1>
-      <p class="text-gray-600">Encuentra los GIFs perfectos para cualquier ocasión</p>
+      <h1 class="text-4xl font-bold text-black mb-4">Buscar GIFs</h1>
+      <p class="text-gray-700">Encuentra los GIFs perfectos para cualquier ocasión</p>
     </div>
 
     <!-- Search Bar -->
@@ -19,7 +19,7 @@
           [(ngModel)]="searchQuery"
           (keyup)="onSearchInput($event)"
           placeholder="Buscar GIFs..."
-          class="block w-full pl-10 pr-3 py-4 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg">
+          class="block w-full pl-10 pr-3 py-4 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg text-black">
         <div class="absolute inset-y-0 right-0 flex items-center">
           <button 
             (click)="searchGifs()"
@@ -34,7 +34,7 @@
     <!-- Results Header -->
     <div class="mb-6">
       <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-semibold text-gray-900">
+        <h2 class="text-2xl font-semibold text-black">
           {{ hasSearched ? `Resultados para "${searchQuery}"` : 'GIFs Trending' }}
         </h2>
         <button 
@@ -44,7 +44,7 @@
           Ver Trending
         </button>
       </div>
-      <p class="text-gray-600 mt-2">
+      <p class="text-gray-700 mt-2">
         {{ hasSearched ? `${gifs.length} GIFs encontrados` : 'Los GIFs más populares del momento' }}
       </p>
     </div>
