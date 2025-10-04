@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { GifListComponent } from '../../components/gif-list/gif-list.component';
+import { GifsService } from '../../services/gifs.service';
 
 
 @Component({
@@ -9,5 +10,6 @@ import { GifListComponent } from '../../components/gif-list/gif-list.component';
   styles: ``
 })
 export default class TrendingPageComponent {
+  gifsService = inject(GifsService);
 
 }

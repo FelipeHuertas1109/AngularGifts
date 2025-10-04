@@ -1,1 +1,87 @@
-<p>search-page works!</p>
+<div class="min-h-screen bg-gray-50 py-8">
+  <div class="max-w-6xl mx-auto px-4">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Buscar GIFs</h1>
+      <p class="text-gray-600">Encuentra los GIFs perfectos para cualquier ocasión</p>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="max-w-2xl mx-auto mb-8">
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+        <input 
+          type="text" 
+          [(ngModel)]="searchQuery"
+          (keyup)="onSearchInput($event)"
+          placeholder="Buscar GIFs..."
+          class="block w-full pl-10 pr-3 py-4 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg">
+        <div class="absolute inset-y-0 right-0 flex items-center">
+          <button 
+            (click)="searchGifs()"
+            [disabled]="!searchQuery.trim() || loading"
+            class="mr-2 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-200">
+            {{ loading ? 'Buscando...' : 'Buscar' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Header -->
+    <div class="mb-6">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-semibold text-gray-900">
+          {{ hasSearched ? `Resultados para "${searchQuery}"` : 'GIFs Trending' }}
+        </h2>
+        <button 
+          *ngIf="hasSearched"
+          (click)="loadTrendingGifs()"
+          class="px-4 py-2 text-blue-500 hover:text-blue-700 border border-blue-500 hover:border-blue-700 rounded-lg transition-colors duration-200">
+          Ver Trending
+        </button>
+      </div>
+      <p class="text-gray-600 mt-2">
+        {{ hasSearched ? `${gifs.length} GIFs encontrados` : 'Los GIFs más populares del momento' }}
+      </p>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12]" class="animate-pulse">
+        <div class="bg-gray-300 rounded-lg h-48 w-full"></div>
+      </div>
+    </div>
+
+    <!-- GIFs Grid -->
+    <div *ngIf="!loading && gifs.length > 0" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div *ngFor="let gif of gifs" class="relative group cursor-pointer">
+        <img 
+          [src]="gif.images.original.url" 
+          [alt]="gif.title"
+          [title]="gif.title"
+          class="h-auto w-full max-w-full rounded-lg object-cover transition-transform duration-300 group-hover:scale-105"
+          loading="lazy">
+      </div>
+    </div>
+
+    <!-- No Results -->
+    <div *ngIf="!loading && gifs.length === 0 && hasSearched" class="text-center py-12">
+      <div class="text-gray-400 mb-4">
+        <svg class="mx-auto h-16 w-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </div>
+      <h3 class="text-lg font-medium text-gray-900 mb-2">No se encontraron GIFs</h3>
+      <p class="text-gray-500 mb-4">Intenta con otros términos de búsqueda</p>
+      <button 
+        (click)="loadTrendingGifs()"
+        class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200">
+        Ver GIFs Trending
+      </button>
+    </div>
+  </div>
+</div>

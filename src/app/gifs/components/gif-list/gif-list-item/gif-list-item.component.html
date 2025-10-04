@@ -1,3 +1,8 @@
-<div>
-    <img class="h-auto max-w-full rounded-lg" [src]="imageUrl()" alt="">
+<div class="group cursor-pointer">
+  <img 
+    [src]="imageUrl" 
+    [alt]="altText"
+    [title]="title"
+    class="h-auto w-full max-w-full rounded-lg object-cover transition-transform duration-300 group-hover:scale-105"
+    loading="lazy">
 </div>

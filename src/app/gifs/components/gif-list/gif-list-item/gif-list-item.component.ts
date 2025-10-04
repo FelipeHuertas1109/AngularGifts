@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { GifPhyItem } from '../../../interfaces/gigphy.interface';
 
 @Component({
   selector: 'gif-list-item',
@@ -7,6 +8,17 @@ import { Component, input } from '@angular/core';
   styles: ``
 })
 export class GifListItemComponent {
-  
-    imageUrl = input.required<string>();
+  gif = input.required<GifPhyItem>();
+
+  get imageUrl(): string {
+    return this.gif().images.original.url;
+  }
+
+  get title(): string {
+    return this.gif().title;
+  }
+
+  get altText(): string {
+    return this.gif().title || 'GIF';
+  }
 }

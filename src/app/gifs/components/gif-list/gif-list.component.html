@@ -1,40 +1,27 @@
 
+<div class="w-full max-w-full overflow-hidden px-4">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <div *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12]" class="animate-pulse">
+      <div class="bg-gray-300 rounded-lg h-48 w-full"></div>
+    </div>
+  </div>
 
-<div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-full overflow-hidden px-4">
-    <div>
-        <img class="h-auto w-full max-w-full rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="">
-    </div>
-    <div>
-        <img class="h-auto w-full max-w-full rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt="">
-    </div>
-    <div>
-        <img class="h-auto w-full max-w-full rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt="">
-    </div>
-    <div>
-        <img class="h-auto w-full max-w-full rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt="">
-    </div>
-    <div>
-        <img class="h-auto w-full max-w-full rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" alt="">
-    </div>
-    <div>
-        <img class="h-auto w-full max-w-full rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg" alt="">
-    </div>
-    <div>
-        <img class="h-auto w-full max-w-full rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-6.jpg" alt="">
-    </div>
-    <div>
-        <img class="h-auto w-full max-w-full rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-7.jpg" alt="">
-    </div>
-    <div>
-        <img class="h-auto w-full max-w-full rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-8.jpg" alt="">
-    </div>
-    <div>
-        <img class="h-auto w-full max-w-full rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg" alt="">
-    </div>
-    <div>
-        <img class="h-auto w-full max-w-full rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-10.jpg" alt="">
-    </div>
-    <div>
-        <img class="h-auto w-full max-w-full rounded-lg object-cover" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-11.jpg" alt="">
-    </div>
+  <!-- GIFs Grid -->
+  <div *ngIf="!loading" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <gif-list-item 
+      *ngFor="let gif of gifs" 
+      [gif]="gif">
+    </gif-list-item>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="!loading && gifs.length === 0" class="text-center py-8">
+    <p class="text-gray-500">No se pudieron cargar los GIFs</p>
+    <button 
+      (click)="loadTrendingGifs()" 
+      class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+      Reintentar
+    </button>
+  </div>
 </div>
